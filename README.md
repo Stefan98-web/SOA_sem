@@ -1,2 +1,2 @@
 # SOA_sem
-Seminarski rad, Servisno-orijentisane arhitekture
+Seminarski rad i projekat, Servisno-orijentisane arhitekture
