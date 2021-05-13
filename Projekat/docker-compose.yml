@@ -1,0 +1,31 @@
+version: '3.0'
+services:
+    mongo:
+      image: mongo
+      volumes:
+        - mongodata:/data/db
+    nats:
+      image: nats:latest
+    sensor:
+      build:
+        context: .
+      env_file: docker-compose.env
+      environment:
+          NODEID: "node-sensor"
+          SERVICES: sensor
+      depends_on:
+        - nats
+    data:
+      build:
+        context: .
+      env_file: docker-compose.env
+      environment:
+        NODEID: "node-data"
+        SERVICES: data
+      depends_on:
+        - nats
+        - mongo
+      links:
+        - mongo
+volumes:
+  mongodata:
