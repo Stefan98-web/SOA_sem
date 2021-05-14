@@ -1,0 +1,9 @@
+{
+	"devices": [
+		{
+			"id": 1,
+			"type": "sensor",
+			"interval": 10000
+		}
+	]
+}

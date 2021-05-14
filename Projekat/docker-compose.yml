@@ -9,6 +9,7 @@ services:
     sensor:
       build:
         context: .
+      image: service-sensor
       env_file: docker-compose.env
       environment:
           NODEID: "node-sensor"
@@ -18,6 +19,7 @@ services:
     data:
       build:
         context: .
+      image: data-sensor
       env_file: docker-compose.env
       environment:
         NODEID: "node-data"
