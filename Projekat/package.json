@@ -23,7 +23,9 @@
     "moleculer-repl": "^0.6.4",
     "moleculer-web": "^0.10.0-beta2",
     "mongodb": "^3.6.6",
+    "mqtt": "^4.2.6",
     "nats": "^1.4.12",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "request": "^2.88.2"
   }
 }

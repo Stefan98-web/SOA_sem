@@ -4,6 +4,11 @@
 			"id": 1,
 			"type": "sensor",
 			"interval": 10000
+		},
+		{
+			"id": 2,
+			"type": "actuator",
+			"interval": null
 		}
 	]
 }
