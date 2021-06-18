@@ -6,7 +6,7 @@
 @Annotation(property = "value")
 define stream InputStream (name string, temp int, bat int, waveperiod int, time string);
 
-@sink(type='http', publisher.url='http://gateway:3000/CEP',method='POST', headers='Content-type:application/json', basic.auth.enabled='false', @map(type='json'))
+@sink(type='http', publisher.url='http://gateway:4000/CEP',method='POST', headers='Content-type:application/json', basic.auth.enabled='false', @map(type='json'))
 define stream OutputStream (name string, temp int, bat int, waveperiod int, time string, warning string );
 
 @info(name = 'TemperatureQuery')

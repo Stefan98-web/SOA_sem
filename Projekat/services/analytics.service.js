@@ -37,10 +37,8 @@ module.exports = {
 
 				if(warningExist!="No warning")
 				{
-					console.log("DB:"+warning.name+".........warning:"+warning.warning);
                 	this.adapter.insert({ "Beach name": warning.name, "Water temperature": warning.temp, "Battery life": warning.bat, "Wave period": warning.waveperiod, "Time": warning.time, "warning": warning.warning });
 					client.publish("Command", JSON.stringify(warning));
-				
 				}
             },
         },

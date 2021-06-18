@@ -81,10 +81,20 @@ services:
       environment:
         NODEID: "node-gateway"
         SERVICES: gateway
-        PORT: 3000
+        PORT: 4000
       ports:
-        - "3000:3000"
+        - "4000:4000"
       depends_on:
         - nats
+    webdashboard:
+      build:
+        context: ./webdashboard
+        dockerfile: Dockerfile
+      ports:
+        - 3001:3000
+      stdin_open: true
+      volumes:
+        - './webdashboard:/front'
+        - '/front/node_modules'
 volumes:
   mongodata:

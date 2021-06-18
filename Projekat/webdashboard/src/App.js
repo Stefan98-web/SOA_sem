@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+import Navbar from './navbar';
 import './App.css';
+import InputsData from './inputsData';
+import SensorSpecs from './sensorSpecsInput';
+import React from 'react';
 
-function App() {
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+        showForm:false,
+        showGet:false
+    }
+}//onGet={()=>this.setState({showGet: true,showForm: false})}
+render(){
+  const {showForm}= this.state;
+  const {showGet}= this.state;
   return (
+    
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar onNewInput ={()=>this.setState({showForm: true,showGet:false})} onGet={()=>this.setState({showGet: true,showForm: false})}/>
+      {showForm ? 
+      <InputsData onClose={()=>this.setState({showForm:false})}/>
+      : null}
+      {showGet ? 
+      <SensorSpecs onClose={()=>this.setState({showGet:false})}/>
+      : null}
     </div>
   );
+}
 }
 
 export default App;

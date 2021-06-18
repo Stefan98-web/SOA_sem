@@ -1,23 +1,45 @@
 "use strict";
 const express = require("express");
 const bodyParser = require('body-parser');
+const socket = require("socket.io");
 
 module.exports = {
     name: "gateway",
     settings: {
         port: process.env.PORT || 3000,
+        cors: {
+            // Configures the Access-Control-Allow-Origin CORS header.
+            origin: "*",
+            // Configures the Access-Control-Allow-Methods CORS header.
+            methods: ["GET", "OPTIONS", "POST", "PUT", "DELETE"],
+            // Configures the Access-Control-Allow-Headers CORS header.
+            allowedHeaders: [],
+            // Configures the Access-Control-Expose-Headers CORS header.
+            exposedHeaders: [],
+            // Configures the Access-Control-Allow-Credentials CORS header.
+            credentials: false,
+            // Configures the Access-Control-Max-Age CORS header.
+            maxAge: 3600
+        }
+    },
+    events:{
+        "warning"(message) {
+            console.log("EVENT!"+message);
+            this.io.emit('Notification', { warning:"Warning!", info: message });
+        }
     },
     methods: {
         initRoutes(app) {
-            app.get("/beachinfo", this.getData);///za data service
-            app.get("/sensorinfo", this.getSensorData);
+            app.put("/beachinfo", this.getData);
+            app.put("/sensorinfo", this.getSensorData);
             app.put("/setsensor", this.putData);
             app.post("/CEP", this.cepService);
         },
         getData(req, res) {
+            
             return Promise.resolve()
                 .then(() => {
-                    return this.broker.call("data.getData", { "name": req.body.name, "temp": req.body.temp,"time": req.body.time}).then(temps => {
+                    return this.broker.call("data.getData", { "name": req.body.BeachName, "temp": req.body.WaterTemperature,"wavePeriod": req.body.WavePeriod,"bat": req.body.BatteryLife}).then(temps => {
                         res.send(temps);
                     });
                 })
@@ -65,6 +87,23 @@ module.exports = {
         app.use(bodyParser.json());
         app.listen(this.settings.port);
         this.initRoutes(app);
-        this.app = app;
+        this.app = app;   
+    },
+    started(){
+        this.io = socket(this.server, {
+            cors: {
+                origin: "*",
+                methods: ["GET", "POST"]
+            }
+        });
+
+        this.io.on("connection", client => {
+            console.log("Client successfully connected!");
+
+            client.on("disconnect", () => {
+                console.log("Client disconnected.");
+            });
+
+        });
     }
 };

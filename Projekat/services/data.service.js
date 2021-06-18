@@ -59,7 +59,8 @@ module.exports = {
 				 params:{
 				 	name: {type: "String"},
 				 	temp: {type: "String"},
-				 	time: {type: "String"}
+				 	wavePeriod: {type: "String"},
+					bat: {type: "String"}
 				 }
 			},
 			async handler(ctx){
@@ -67,18 +68,17 @@ module.exports = {
                 console.log("pozvan getData iz data servisa"+ctx.params.name);
 				let params = {
 					limit:10,
-					sort: ["Beach name", "Water Temperature", "Measurement Timestamp"],
-					fields:["Beach name", "Water Temperature", "Measurement Timestamp"],
+					sort: ["Beach name", "Water Temperature", "Battery Life"],
 					query: {}
 					 };
-				if(ctx.params.name){
+				if(ctx.params.name!="All"){
 						params.query["Beach name"]=ctx.params.name;
 					}
-				if(ctx.params.temp){
-					   params.query["Water Temperature"]=parseInt(ctx.params.temp);
+				if(ctx.params.temp!="All"){
+					   params.query["Water Temperature"]=ctx.params.temp;
 				   }
-				if(ctx.params.time){
-					   params.query["Measurement Timestamp"]=ctx.params.time;
+				if(ctx.params.bat!="All"){
+					   params.query["Battery Life"]=ctx.params.bat;
 				   }
 
 				const result=await this.adapter.find(params);

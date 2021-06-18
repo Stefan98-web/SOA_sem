@@ -8,7 +8,7 @@
 		{
 			"id": 2,
 			"type": "actuator",
-			"interval": null
+			"interval": 1000
 		}
 	]
 }
