@@ -34,7 +34,7 @@ module.exports = {
 			},
 			async handler(ctx){
                 
-                let entity = ctx.params.data;	
+                let entity = ctx.params.data;
 				const doc = await this.adapter.insert(entity);
 				let info = { "entity":entity };
 
@@ -65,23 +65,25 @@ module.exports = {
 			},
 			async handler(ctx){
 
-                console.log("pozvan getData iz data servisa"+ctx.params.name);
 				let params = {
 					limit:10,
-					sort: ["Beach name", "Water Temperature", "Battery Life"],
+					sort: ["Beach Name", "Water Temperature", "Battery Life"],
 					query: {}
 					 };
 				if(ctx.params.name!="All"){
-						params.query["Beach name"]=ctx.params.name;
+						params.query["Beach Name"]=ctx.params.name.toString();
 					}
 				if(ctx.params.temp!="All"){
-					   params.query["Water Temperature"]=ctx.params.temp;
+					   params.query["Water Temperature"]=ctx.params.temp.toString();
 				   }
 				if(ctx.params.bat!="All"){
-					   params.query["Battery Life"]=ctx.params.bat;
+					   params.query["Battery Life"]=ctx.params.bat.toString();
 				   }
+				if(ctx.params.wavePeriod!="All"){
+					params.query["Wave Period"]=ctx.params.wavePeriod.toString();
+				}
 
-				const result=await this.adapter.find(params);
+				const result = await this.adapter.find(params);
 				return result;
 			}
 		},	

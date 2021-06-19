@@ -68,11 +68,11 @@ class InputsData extends Component {
                     </div>
                     <div>
                     <label>Water temperature:</label>
-                    <div ><input type='number' min="0" className='form-control' name='WaterTemperature' value={this.state.WaterTemperature} onChange={this.handleChange} /></div>
+                    <div ><input type='number' step="0.1" min="0" className='form-control' name='WaterTemperature' value={this.state.WaterTemperature} onChange={this.handleChange} /></div>
                     </div>
                     <div>
                     <label>Battery life:</label>
-                    <div ><input type='number' min="0" className='form-control' name='BatteryLife' value={this.state.BatteryLife} onChange={this.handleChange}/></div>
+                    <div ><input type='number' step="0.1" min="0" className='form-control' name='BatteryLife' value={this.state.BatteryLife} onChange={this.handleChange}/></div>
                     </div>
                     <div>
                     <label>Wave period:</label>

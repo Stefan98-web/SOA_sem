@@ -24,8 +24,7 @@ module.exports = {
     },
     events:{
         "warning"(message) {
-            console.log("EVENT!"+message);
-            this.io.emit('Notification', { warning:"Warning!", info: message });
+            this.io.emit('Notification', { info: message });
         }
     },
     methods: {
@@ -85,9 +84,12 @@ module.exports = {
         const app = express();
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(bodyParser.json());
-        app.listen(this.settings.port);
         this.initRoutes(app);
-        this.app = app;   
+        this.app = app; 
+
+        const httpServer = require("http").createServer(app);
+        this.server=httpServer;
+        httpServer.listen(this.settings.port);  
     },
     started(){
         this.io = socket(this.server, {

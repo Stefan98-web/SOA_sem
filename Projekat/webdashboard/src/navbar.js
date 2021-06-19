@@ -6,7 +6,8 @@ import './navbar.css';
 class Navbar extends Component {
     static defaultProps = {
         onNewInput() {},
-        onGet() {}
+        onGet() {},
+        onNotifs() {}
     }
     static propTypes = {
         onNewInput: PropTypes.func,
@@ -20,7 +21,7 @@ class Navbar extends Component {
                 <nav>
                     <li> <a onClick={this.props.onGet}>Get data from sensors</a> </li>
                     <li> <a onClick={this.props.onNewInput}>Search</a> </li>
-                    <li> <a>About</a> </li>
+                    <li> <a onClick={this.props.onNotifs}>Notifications</a> </li>
                 </nav>
             </header>
         );

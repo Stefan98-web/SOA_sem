@@ -102,16 +102,16 @@ module.exports = {
 				const params = ctx.params;
 				switch (params.message.warning) {
 					case "Cold water": this.logger.info(`Warning: Cold water on ${params.message.name}`); 
-					message = "Warning: Cold water on "+params.message.name;
+					message = "Warning: Cold water on "+params.message.name+"!\n Measurement Timestamp: " + params.message.time;
 					break;
 					case "Medium temperature of water": this.logger.info(`Warning:${params.message.warning} on ${params.message.name}`); 
-					message = "Warning: Medium temperature of water on "+params.message.name;
+					message = "Warning: Medium temperature of water on "+params.message.name +"!\n Measurement Timestamp: " + params.message.time;
 					break;
 					case "Low battery level": this.logger.info(`Detected ${params.message.warning} on ${params.message.name} sensor`); 
-					message ="Detected low battery level on " + params.message.name +" sensor!";
+					message ="Detected low battery level on " + params.message.name +" sensor!" + "!\n Measurement Timestamp: " + params.message.time;
 					break;
 					case "Low wave period": this.logger.info(`Detected ${params.message.warning} on ${params.message.name}`); 
-					message ="Detected low wave period on " + params.message.name;
+					message ="Detected low wave period on " + params.message.name + "!\n Measurement Timestamp: " + params.message.time;
 					break;
 					default:
 				}
